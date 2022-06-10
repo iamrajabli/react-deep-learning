@@ -24,3 +24,13 @@
         - [Список всех обновлений React](https://github.com/facebook/react/blob/main/CHANGELOG.md)
 
 <hr>
+
+### 03 React components 🚀
+- 🔑 Source: [CODE](./03COMPONENT/)
+- 🔍 Documentation:
+    - 👁‍🗨 EN:
+        - [Components and Props](https://reactjs.org/docs/components-and-props.html)
+    - 👁‍🗨 RU:
+        - [Компоненты и пропсы](https://ru.reactjs.org/docs/components-and-props.html)
+
+<hr>
