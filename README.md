@@ -40,6 +40,17 @@
 
 ```
 cd employees-app
+npm install
 npm start
+```
+<hr>
+
+### 05 Components Properties 🚀
+- 🔑 Source: [CODE](./05%D0%A1omponentProperties/)
+
+```
+cd component-properties-app
+yarn
+yarn dev
 ```
 <hr>
