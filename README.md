@@ -34,3 +34,12 @@
         - [Компоненты и пропсы](https://ru.reactjs.org/docs/components-and-props.html)
 
 <hr>
+
+### 04 Employees Project Components 🚀
+- 🔑 Source: [CODE](./04EmployeesProject/)
+
+```
+cd employees-app
+npm start
+```
+<hr>

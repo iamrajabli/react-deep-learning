@@ -7,6 +7,15 @@ const Header = () => {
   return <h2>{text}</h2>
 }
 
+function NewComp() {
+  return (
+    <div>
+      <h2>Salam</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad sunt odit necessitatibus quidem optio quia maxime excepturi temporibus provident numquam in ratione ipsum corrupti illo voluptatibus, cum explicabo placeat tempora.</p>
+    </div>
+  )
+}
+
 // This is component [function]
 const Login = () => {
   const text = 'Login';
@@ -43,6 +52,7 @@ function App() {
     <div className="App">
       <Header />
       <Field />
+      <NewComp />
     </div>
   );
 }
