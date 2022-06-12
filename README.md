@@ -54,3 +54,13 @@ yarn
 yarn dev
 ```
 <hr>
+
+### 06 Components Properties Project 🚀
+- 🔑 Source: [CODE](./06PropertiesProject/)
+
+```
+cd properties-project-app
+yarn
+yarn dev
+```
+<hr>

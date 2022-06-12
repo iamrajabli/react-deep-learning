@@ -5,7 +5,14 @@ import EmployersList from '../employers-list/employers-list';
 import EmployersForm from '../employers-add-form/employers-add-form';
 import './app.css';
 
+
 function App() {
+  
+    const data = [
+        { name: 'Roman D.', salary: 800, increase: true },
+        { name: 'Alex R.', salary: 3000, increase: false },
+        { name: 'Carl M.', salary: 5000, increase: false },
+    ];
     return (
         <div className="app">
             <AppInfo />
@@ -14,7 +21,7 @@ function App() {
                 <AppFilter />
             </div>
 
-            <EmployersList />
+            <EmployersList data={data}/>
             <EmployersForm />
         </div>
     );
