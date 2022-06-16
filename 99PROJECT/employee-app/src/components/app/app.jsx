@@ -18,18 +18,76 @@ class App extends React.Component {
                 { id: 3, name: 'Carl M.', salary: 5000, increase: false, like: true },
             ]
         }
+
+        this.generatorID()
     }
-    
-    // Delete item
+    generatorID = () => {
+        const id = new Date().getTime().toString().slice(9, 14);
+        return +id;
+    }
+    // Delete user
     deleteItem = (id) => {
-        this.setState(({data}) => 
-            ({
-                data: data.filter(item => item.id !== id)
-            })
-        )
+        this.setState(({ data }) =>
+        ({
+            data: data.filter(item => item.id !== id)
+        }));
+    };
+    // Add user
+    addItem = (obj) => {
+        // Way 1
+        // obj.id = this.generatorID();
+        // obj.increase = false;
+        // obj.like = false;
+        // const newList = this.state.data.map( item => item);
+        // newList.push(obj);
+
+        // this.setState({data: newList});
+
+        // Way 2
+        const newItem = {
+            ...obj,
+            id: this.generatorID(),
+            increase: false,
+            like: false,
+        }
+
+        this.setState(({ data }) => {
+            const newList = [...data, newItem];
+
+            return {
+                data: newList
+            }
+        })
     }
 
+    // Add star
+    onToggleIncrease = (id) => {
 
+        this.setState(({ data }) => ({
+            data: data.map(item => {
+
+                if (item.id === id) {
+                    return { ...item, increase: !item.increase }
+                }
+
+                return item;
+            })
+        }
+        ));
+
+    }
+
+    // Add like
+    onToggleLike = (id) => {
+        this.setState(({ data }) => ({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return { ...item, like: !item.like }
+                }
+                return item;
+            })
+        }));
+    }
     render() {
 
         return (
@@ -43,8 +101,10 @@ class App extends React.Component {
                 <EmployersList
                     data={this.state.data}
                     onDelete={this.deleteItem}
+                    onToggleIncrease={this.onToggleIncrease}
+                    onToggleLike={this.onToggleLike}
                 />
-                <EmployersForm />
+                <EmployersForm onAdd={this.addItem} />
             </div>
         );
 
