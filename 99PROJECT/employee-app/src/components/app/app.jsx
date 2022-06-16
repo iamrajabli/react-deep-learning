@@ -18,13 +18,13 @@ class App extends React.Component {
                 { id: 3, name: 'Carl M.', salary: 5000, increase: false, like: true },
             ]
         }
-
-        this.generatorID()
+        this.generatorID();
     }
+    // Gerate new randomly id
     generatorID = () => {
         const id = new Date().getTime().toString().slice(9, 14);
         return +id;
-    }
+    };
     // Delete user
     deleteItem = (id) => {
         this.setState(({ data }) =>
@@ -32,6 +32,7 @@ class App extends React.Component {
             data: data.filter(item => item.id !== id)
         }));
     };
+
     // Add user
     addItem = (obj) => {
         // Way 1
@@ -57,8 +58,10 @@ class App extends React.Component {
             return {
                 data: newList
             }
-        })
-    }
+        });
+
+
+    };
 
     // Add star
     onToggleIncrease = (id) => {
@@ -74,8 +77,7 @@ class App extends React.Component {
             })
         }
         ));
-
-    }
+    };
 
     // Add like
     onToggleLike = (id) => {
@@ -87,12 +89,18 @@ class App extends React.Component {
                 return item;
             })
         }));
-    }
+    };
+
+
     render() {
+        const totalEmployees = this.state.data.length;
+        const willAward = this.state.data.filter(item => item.increase).length;
 
         return (
             <div className="app">
-                <AppInfo />
+                <AppInfo
+                    totalEmployees={totalEmployees}
+                    willAward={willAward} />
                 <div className="search-panel">
                     <SearchPanel />
                     <AppFilter />
