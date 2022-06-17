@@ -16,7 +16,8 @@ class App extends React.Component {
                 { id: 1, name: 'Roman D.', salary: 800, increase: true, like: false },
                 { id: 2, name: 'Alex R.', salary: 3000, increase: false, like: false },
                 { id: 3, name: 'Carl M.', salary: 5000, increase: false, like: true },
-            ]
+            ],
+            term: ''
         }
         this.generatorID();
     }
@@ -91,10 +92,27 @@ class App extends React.Component {
         }));
     };
 
+    // Search
+    searchEmp = (items, term) => {
+        if(term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => item.name.indexOf(term) > -1)
+    }
+
+    // update *term* for searching
+    onUpdateSearch = (term) => {
+        this.setState({term});
+    }
+
 
     render() {
+        const {data, term} = this.state;
         const totalEmployees = this.state.data.length;
         const willAward = this.state.data.filter(item => item.increase).length;
+        const visibleData = this.searchEmp(data, term);
+
 
         return (
             <div className="app">
@@ -102,12 +120,12 @@ class App extends React.Component {
                     totalEmployees={totalEmployees}
                     willAward={willAward} />
                 <div className="search-panel">
-                    <SearchPanel />
+                    <SearchPanel searchProp={this.onUpdateSearch} />
                     <AppFilter />
                 </div>
 
                 <EmployersList
-                    data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
                     onToggleIncrease={this.onToggleIncrease}
                     onToggleLike={this.onToggleLike}
