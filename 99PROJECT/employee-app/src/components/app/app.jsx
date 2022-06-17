@@ -157,7 +157,6 @@ class App extends React.Component {
         const visibleData = this.filterEmp(this.searchEmp(data, term), this.state.filter);
 
 
-
         return (
             <div className="app">
                 <AppInfo
