@@ -17,7 +17,8 @@ class App extends React.Component {
                 { id: 2, name: 'Alex R.', salary: 3000, increase: false, like: false },
                 { id: 3, name: 'Carl M.', salary: 5000, increase: false, like: true },
             ],
-            term: ''
+            term: '',
+            filter: 'All'
         }
         this.generatorID();
     }
@@ -93,25 +94,68 @@ class App extends React.Component {
     };
 
     // Search
-    searchEmp = (items, term) => {
-        if(term.length === 0) {
-            return items;
+    searchEmp = (data, term) => {
+        // way 1
+        // if (term.length > 0 && this.state.salary) {
+        //     const newData = data.filter(item => item.salary > 1000);
+        //     return newData.filter(item => item.name.indexOf(term) > -1);
+        // }
+
+        // if (term.length > 0 && this.state.increase) {
+        //     const newData = data.filter(item => item.increase);
+        //     return newData.filter(item => item.name.indexOf(term) > -1);
+        // }
+
+        // if (this.state.salary) {
+        //     return data.filter(item => item.salary > 1000);
+        // }
+
+        // if (this.state.increase) {
+        //     return data.filter(item => item.increase)
+        // }
+
+        // if (term.length == 0) {
+        //     return data;
+        // }
+
+        // way 2 
+        if (term.length === 0) {
+            return data;
         }
 
-        return items.filter(item => item.name.indexOf(term) > -1)
+        return data.filter(item => item.name.indexOf(term) > -1);
+
+    };
+
+    // Salary filter > 1000
+    onUpdateFilter = (filter) => {
+        this.setState({ filter });
+    };
+
+    filterEmp = (data, filter) => {
+        switch (filter) {
+            case 'All':
+                return data;
+            case 'salary':
+                return data.filter(item => item.salary > 1000);
+            case 'increase':
+                return data.filter(item => item.increase);
+        }
     }
 
     // update *term* for searching
     onUpdateSearch = (term) => {
-        this.setState({term});
-    }
+        this.setState(({ term }));
+    };
 
 
     render() {
-        const {data, term} = this.state;
+        const { data, term } = this.state;
         const totalEmployees = this.state.data.length;
         const willAward = this.state.data.filter(item => item.increase).length;
-        const visibleData = this.searchEmp(data, term);
+
+       const visibleData = this.filterEmp(this.searchEmp(data, term), this.state.filter);
+
 
 
         return (
@@ -121,7 +165,7 @@ class App extends React.Component {
                     willAward={willAward} />
                 <div className="search-panel">
                     <SearchPanel searchProp={this.onUpdateSearch} />
-                    <AppFilter />
+                    <AppFilter onUpdateFilter={this.onUpdateFilter} filterProps={this.state.filter}/>
                 </div>
 
                 <EmployersList
