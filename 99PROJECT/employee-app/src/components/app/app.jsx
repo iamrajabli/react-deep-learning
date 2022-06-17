@@ -154,7 +154,7 @@ class App extends React.Component {
         const totalEmployees = this.state.data.length;
         const willAward = this.state.data.filter(item => item.increase).length;
 
-       const visibleData = this.filterEmp(this.searchEmp(data, term), this.state.filter);
+        const visibleData = this.filterEmp(this.searchEmp(data, term), this.state.filter);
 
 
 
@@ -165,7 +165,7 @@ class App extends React.Component {
                     willAward={willAward} />
                 <div className="search-panel">
                     <SearchPanel searchProp={this.onUpdateSearch} />
-                    <AppFilter onUpdateFilter={this.onUpdateFilter} filterProps={this.state.filter}/>
+                    <AppFilter onUpdateFilter={this.onUpdateFilter} filterProps={this.state.filter} />
                 </div>
 
                 <EmployersList
