@@ -24,6 +24,7 @@ export default class MarvelServices {
 
     _transformCharacter = (char) => {
         return {
+            id: char.id,
             name: char.name,
             description: (char.description) ? `${char.description.slice(0, 210)}...` : "There is no information about this hero. He's just a hero...",
             thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
