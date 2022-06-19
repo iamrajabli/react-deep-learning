@@ -78,8 +78,7 @@ class App extends React.Component {
                 return item;
             })
         }
-        ));
-    };
+        ))};
 
     // Add like
     onToggleLike = (id) => {
