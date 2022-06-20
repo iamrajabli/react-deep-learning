@@ -45,9 +45,7 @@ export default class RandomChar extends React.Component {
         this.onCharLoading();
         this.MarvelService
             .getCharacter(id)
-            .then(res => {
-                this.onCharLoaded(res);
-            })
+            .then(this.onCharLoaded)
             .catch(this.onErrorLoaded);
     }
 
