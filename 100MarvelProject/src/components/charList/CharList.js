@@ -29,7 +29,7 @@ export default class CharList extends React.Component {
     onCharListLoaded = (charList) => {
         this.setState(({
             charList,
-            loading: false,
+            loading: false, 
             error: false
         }));
     }
@@ -37,7 +37,10 @@ export default class CharList extends React.Component {
     onRender = (charList) => {
         return charList.map(char => {
             return (
-                <li className="char__item" key={char.id}>
+                <li 
+                className="char__item" 
+                key={char.id}
+                onClick={() => this.props.onCharSelected(char.id)}>
                     <img src={char.thumbnail} alt="abyss" />
                     <div className="char__name">{char.name}</div>
                 </li>

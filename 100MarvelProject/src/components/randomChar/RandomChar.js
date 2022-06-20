@@ -27,6 +27,12 @@ export default class RandomChar extends React.Component {
         }))
     }
 
+    onCharLoading = () => {
+        this.setState({
+            loading: true
+        })
+    }
+
     onErrorLoaded = () => {
         this.setState({
             error: true,
@@ -36,6 +42,7 @@ export default class RandomChar extends React.Component {
 
     updateChar = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
+        this.onCharLoading();
         this.MarvelService
             .getCharacter(id)
             .then(res => {
@@ -49,7 +56,7 @@ export default class RandomChar extends React.Component {
         const { char, loading, error } = this.state;
         const errorContent = error ? <ErrorMessage /> : null;
         const loadingContent = loading ? <Spinner /> : null;
-        const content = !(error || loading) ? <SmartLeft char={char} /> : null;
+        const content = !(error || loading) ? <View char={char} /> : null;
 
 
         return (
@@ -78,7 +85,7 @@ export default class RandomChar extends React.Component {
 };
 
 
-const SmartLeft = ({ char }) => {
+const View = ({ char }) => {
     const { name, description, thumbnail, homepage, wiki } = char;
     return (
         <div className="randomchar__block">

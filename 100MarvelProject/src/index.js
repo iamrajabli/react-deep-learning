@@ -9,9 +9,9 @@ import './style/style.scss';
 //   .then(data => console.log(data))
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
