@@ -1,44 +1,32 @@
 import React from "react";
+import { useState } from "react";
+const App = () => {
 
-class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currently: props.counter
-    }
+  const [currently, setCurrentyl] = useState(0)
+  const change = (i) => {
+    setCurrentyl(currently => currently + i)
   }
 
-  prev = () => {
-    this.setState({ currently: this.state.currently -= 1 });
+  const random = () => {
+    setCurrentyl(Math.floor(Math.random() * (50 - - 50) + -50))
   }
 
-  next = () => {
-    this.setState({ currently: this.state.currently += 1 });
+  const reset = () => {
+    setCurrentyl(0)
   }
 
-  random = () => {
-    this.setState({ currently: Math.floor(Math.random() * (50 - - 50) + -50) });
-  }
-
-  reset = () => {
-    this.setState({ currently: this.state.currently = 0 });
-  }
-
-  render() {
-    return (
-      <div class="app">
-        <div class="counter">{this.state.currently}</div>
-        <div class="controls">
-          <button onClick={this.prev}>INC</button>
-          <button onClick={this.next}>DEC</button>
-          <button onClick={this.random}>RND</button>
-          <button onClick={this.reset}>RESET</button>
-        </div>
+  return (
+    <div class="app">
+      <div class="counter">{currently}</div>
+      <div class="controls">
+        <button onClick={() => change(1)}>INC</button>
+        <button onClick={() => change(-1)}>DEC</button>
+        <button onClick={random}>RND</button>
+        <button onClick={reset}>RESET</button>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App
