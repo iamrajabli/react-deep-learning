@@ -1,53 +1,51 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import './charList.scss';
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 
-export default class CharList extends React.Component {
-    state = {
-        charList: [],
-        loading: true,
-        error: false,
-        offset: 210
+const CharList = (props) => {
+
+    const [charList, setCharList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [offset, setOffset] = useState(210);
+
+    const marvelServices = new MarvelService();
+
+    useEffect(() => {
+        onRequest();
+    }, [])
+
+
+
+    const onRequest = (offset) => {
+        marvelServices.getAllCharacters(offset)
+            .then(onCharListLoaded)
+            .catch(onErrorLoaded);
     }
 
-    marvelService = new MarvelService();
-
-    componentDidMount() {
-        this.onRequest();
+    const onErrorLoaded = () => {
+        setError(true);
+        setLoading(false);
     }
 
-    onRequest = (offset) => {
-        this.marvelService.getAllCharacters(offset)
-            .then(this.onCharListLoaded)
-            .catch(this.onErrorLoaded);
+    const onCharListLoaded = (newCharList) => {
+        setCharList([...charList, ...newCharList]);
+        setLoading(false);
+        setError(false);
+        setOffset(offset => offset + 9)
     }
 
-    onErrorLoaded = () => {
-        this.setState(({
-            loading: false,
-            error: true
-        }))
-    }
 
-    onCharListLoaded = (newCharList) => {
-        this.setState(({ charList, offset }) => ({
-            charList: [...charList, ...newCharList],
-            loading: false,
-            error: false,
-            offset: offset + 9
-        }))
-    }
-
-    onRender = (charList) => {
+    const onRender = (charList) => {
         return charList.map(char => {
             return (
                 <li
                     className="char__item"
                     key={char.id}
-                    onClick={() => this.props.onCharSelected(char.id)}>
+                    onClick={() => props.onCharSelected(char.id)}>
                     <img src={char.thumbnail} alt="abyss" />
                     <div className="char__name">{char.name}</div>
                 </li>
@@ -56,25 +54,24 @@ export default class CharList extends React.Component {
 
     }
 
-    render() {
-        const { charList, loading, error, offset } = this.state;
-        const errorContent = error ? <ErrorMessage /> : null;
-        const loadingContent = loading ? <Spinner /> : null;
-        const content = !(loading || error) ? this.onRender(charList) : null;
+    const errorContent = error ? <ErrorMessage /> : null;
+    const loadingContent = loading ? <Spinner /> : null;
+    const content = !(loading || error) ? onRender(charList) : null;
 
-        return (
-            <div className="char__list">
-                <ul className="char__grid">
-                    {content}
-                    {errorContent}
-                    {loadingContent}
-                </ul>
-                <button
-                    className="button button__main button__long"
-                    onClick={() => { this.onRequest(offset) }}>
-                    <div className="inner">load more</div>
-                </button>
-            </div>
-        )
-    }
+    return (
+        <div className="char__list">
+            <ul className="char__grid">
+                {content}
+                {errorContent}
+                {loadingContent}
+            </ul>
+            <button
+                className="button button__main button__long"
+                onClick={() => { onRequest(offset) }}>
+                <div className="inner">load more</div>
+            </button>
+        </div>
+    )
 };
+
+export default CharList
