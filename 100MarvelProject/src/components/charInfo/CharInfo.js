@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import MarvelService from '../../services/MarvelService';
 import './charInfo.scss';
 import Spinner from '../spinner/Spinner';
@@ -119,4 +121,9 @@ const View = ({ char }) => {
         </>
     )
 }
+
+CharInfo.propTypes = {
+    onCharSelected: PropTypes.number
+}
+
 export default CharInfo;

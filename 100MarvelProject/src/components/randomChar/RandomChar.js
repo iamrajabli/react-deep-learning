@@ -1,5 +1,7 @@
-import './randomChar.scss';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+import './randomChar.scss';
 import MarvelService from '../../services/MarvelService';
 import mjolnir from '../../resources/img/mjolnir.png';
 import Spinner from '../spinner/Spinner';
@@ -95,7 +97,15 @@ const View = ({ char }) => {
             </div>
         </div>
     )
+    
 }
 
+View.propTypes = {
+    name: PropTypes.string,
+    description: PropTypes.string,
+    thumbnail: PropTypes.string,
+    homepage: PropTypes.string,
+    wiki: PropTypes.string
+}
 
 export default RandomChar;

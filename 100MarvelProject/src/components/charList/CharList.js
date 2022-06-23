@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import './charList.scss';
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
@@ -74,4 +76,8 @@ const CharList = (props) => {
     )
 };
 
-export default CharList
+CharList.propTypes = {
+    onCharSelected: PropTypes.func
+}
+
+export default CharList;
