@@ -3,6 +3,7 @@ import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 const App = () => {
 
@@ -19,8 +20,12 @@ const App = () => {
             <main>
                 <RandomChar />
                 <div className="char__content">
-                    <CharList onCharSelected={onCharSelected} />
-                    <CharInfo onCharSelected={selectedChar} />
+                    <ErrorBoundary>
+                        <CharList onCharSelected={onCharSelected} />
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CharInfo onCharSelected={selectedChar} />
+                    </ErrorBoundary>
                 </div>
             </main>
         </div>
