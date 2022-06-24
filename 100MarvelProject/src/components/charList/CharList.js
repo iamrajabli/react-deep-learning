@@ -40,14 +40,28 @@ const CharList = (props) => {
         setOffset(offset => offset + 9)
     }
 
+    const arr = [];
+
+    const setRef = (ref) => {
+        arr.push(ref)
+    }
+
+    const focusItem = (id) => {
+        arr.forEach(item => item.classList.remove('char__item_selected'));
+        arr[id].classList.add('char__item_selected');
+    }
 
     const onRender = (charList) => {
-        return charList.map(char => {
+        return charList.map((char, i) => {
             return (
                 <li
                     className="char__item"
                     key={char.id}
-                    onClick={() => props.onCharSelected(char.id)}>
+                    ref={setRef}
+                    onClick={() => {
+                        props.onCharSelected(char.id)
+                        focusItem(i)
+                    }}>
                     <img src={char.thumbnail} alt="abyss" />
                     <div className="char__name">{char.name}</div>
                 </li>
